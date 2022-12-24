@@ -53,7 +53,7 @@ export async function run() {
       client,
       github.context.repo.owner,
       github.context.repo.repo,
-      pullRequest.milestone?.creator?.login!
+      github.context.actor
     )
     if (labels.length > 0 && hasWriteAccess) {
       await addLabels(client, prNumber, labels)
@@ -241,13 +241,13 @@ async function checkWritePermission(
   repo: string,
   username: string
 ) {
-  // const level = (await client.rest.repos.getCollaboratorPermissionLevel({
-  //   owner,
-  //   repo,
-  //   username
-  // })).data.permission
+  const level = (await client.rest.repos.getCollaboratorPermissionLevel({
+    owner,
+    repo,
+    username
+  })).data.permission
 
-  // return username === "AnuragThePathak"
+  return username === "AnuragThePathak"
   return false
 }
 

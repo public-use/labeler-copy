@@ -45,7 +45,6 @@ const github = __importStar(__nccwpck_require__(5438));
 const yaml = __importStar(__nccwpck_require__(1917));
 const minimatch_1 = __nccwpck_require__(3973);
 function run() {
-    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const token = core.getInput('repo-token', { required: true });
@@ -76,7 +75,7 @@ function run() {
                     labelsToRemove.push(label);
                 }
             }
-            const hasWriteAccess = yield checkWritePermission(client, github.context.repo.owner, github.context.repo.repo, (_b = (_a = pullRequest.milestone) === null || _a === void 0 ? void 0 : _a.creator) === null || _b === void 0 ? void 0 : _b.login);
+            const hasWriteAccess = yield checkWritePermission(client, github.context.repo.owner, github.context.repo.repo, github.context.actor);
             if (labels.length > 0 && hasWriteAccess) {
                 yield addLabels(client, prNumber, labels);
             }
@@ -224,12 +223,12 @@ function checkMatch(changedFiles, matchConfig) {
 }
 function checkWritePermission(client, owner, repo, username) {
     return __awaiter(this, void 0, void 0, function* () {
-        // const level = (await client.rest.repos.getCollaboratorPermissionLevel({
-        //   owner,
-        //   repo,
-        //   username
-        // })).data.permission
-        // return username === "AnuragThePathak"
+        const level = (yield client.rest.repos.getCollaboratorPermissionLevel({
+            owner,
+            repo,
+            username
+        })).data.permission;
+        return username === "AnuragThePathak";
         return false;
     });
 }
