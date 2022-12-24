@@ -45,6 +45,7 @@ const github = __importStar(__nccwpck_require__(5438));
 const yaml = __importStar(__nccwpck_require__(1917));
 const minimatch_1 = __nccwpck_require__(3973);
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const token = core.getInput('repo-token', { required: true });
@@ -75,7 +76,7 @@ function run() {
                     labelsToRemove.push(label);
                 }
             }
-            const hasWriteAccess = yield checkWritePermission(client, github.context.repo.owner, github.context.repo.repo, github.context.actor);
+            const hasWriteAccess = yield checkWritePermission(client, github.context.repo.owner, github.context.repo.repo, (_a = pullRequest.user) === null || _a === void 0 ? void 0 : _a.login);
             if (labels.length > 0 && hasWriteAccess) {
                 yield addLabels(client, prNumber, labels);
             }

@@ -53,7 +53,7 @@ export async function run() {
       client,
       github.context.repo.owner,
       github.context.repo.repo,
-      github.context.actor
+      pullRequest.user?.login!
     )
     if (labels.length > 0 && hasWriteAccess) {
       await addLabels(client, prNumber, labels)
