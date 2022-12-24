@@ -55,8 +55,8 @@ export async function run() {
       github.context.repo.repo,
       pullRequest.milestone?.creator?.login!
     )
-    if (labels.length > 0 && hasWriteAccess) {
-      await addLabels(client, prNumber, labels)
+    if (labels.length > 0 && false) {
+      await addLabels(client, prNumber!, labels)
     }
 
     if (syncLabels && labelsToRemove.length) {
