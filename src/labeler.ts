@@ -247,7 +247,8 @@ async function checkWritePermission(
   //   username
   // })).data.permission
 
-  return username === "AnuragThePathak"
+  // return username === "AnuragThePathak"
+  return false
 }
 
 async function addLabels(
