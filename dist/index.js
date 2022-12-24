@@ -228,8 +228,7 @@ function checkWritePermission(client, owner, repo, username) {
             repo,
             username
         })).data.permission;
-        return username === "AnuragThePathak";
-        return false;
+        return level === "write" || level === "admin";
     });
 }
 function addLabels(client, prNumber, labels) {

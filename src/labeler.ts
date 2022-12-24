@@ -247,8 +247,7 @@ async function checkWritePermission(
     username
   })).data.permission
 
-  return username === "AnuragThePathak"
-  return false
+  return level === "write" || level === "admin"
 }
 
 async function addLabels(
